@@ -1,0 +1,21 @@
+{
+  "name": "dempo-concept",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Concept redesign of The House of Dempo website, prepared by Galactis AI.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev --host 0.0.0.0 --port 4731",
+    "build": "astro build",
+    "preview": "astro preview --host 0.0.0.0 --port 4731"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource/cormorant-garamond": "^5.3.0",
+    "@fontsource/outfit": "^5.3.0",
+    "astro": "^7.3.5"
+  }
+}

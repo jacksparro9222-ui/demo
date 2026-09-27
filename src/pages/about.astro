@@ -1,0 +1,280 @@
+---
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import hero from "../assets/photos/hero-basilica.jpg";
+import founder from "../assets/photos/vasantrao.jpg";
+
+const timeline = [
+  {
+    when: "Half a millennium",
+    text: "The homepage says the family has five and a half centuries of business interests and social responsibility behind it. The Dempos were renowned for agriculture, trading, imports, underwriting and social responsibility. No single founding year is given for that older history, so none is invented here.",
+  },
+  {
+    when: "Birth year",
+    text: "[Placeholder: client to confirm] Published pages do not agree on Vasantrao S. Dempo’s year of birth. A reprinted profile prints one span of years; a later anniversary post uses an ordinal that would fix another. Neither year is shown here.",
+  },
+  {
+    when: "1941",
+    text: "Modern-era operations commenced. V. S. Dempo & Co. Pvt. Ltd. was incorporated, and the house broke ground with iron ore mining and export.",
+  },
+  {
+    when: "1958",
+    text: "At the residence of the Portuguese president, Vasantrao was presented as “Barao Dempo”, an episode recorded in First Among Equals.",
+  },
+  {
+    when: "1961",
+    text: "Dempo Travels, on its company page, has been operating since 1961 as an IATA-accredited agency. The Good Earth dates the travel debut to 1960.",
+  },
+  {
+    when: "1962",
+    text: "Dhempe College of Arts and Science was established at Miramar, under what became the Dempo Charities Trust.",
+  },
+  {
+    when: "18 February 1963",
+    text: "The Navhind Times, Goa’s first English daily, began publication. It covered the first Assembly elections that year, and the Opinion Poll.",
+  },
+  {
+    when: "1966",
+    text: "Srinivassa Sinai Dempo College of Commerce & Economics was established, later at Altinho and now also described at Cujira.",
+  },
+  {
+    when: "1967",
+    text: "Goa Carbon Limited was established, on the company page. The Good Earth, an older essay, says the concern began in 1976.",
+  },
+  {
+    when: "15 August 1970",
+    text: "Navprabha, the Marathi daily, was launched.",
+  },
+  {
+    when: "1975",
+    text: "Vasantrao Dempo Higher Secondary School of Arts & Science and Voicuntrao Sinai Dempo Higher Secondary School of Commerce were established at Miramar.",
+  },
+  {
+    when: "1988",
+    text: "Hindustan Foods Limited was established as a joint venture with Glaxo India.",
+  },
+  {
+    when: "1991",
+    text: "Vasantrao S. Dempo received the Padma Shri for contributions to trade and industry, conferred by President R. Venkataraman.",
+  },
+  {
+    when: "1993",
+    text: "Devashri’s record of completed projects, as the company page tells it, gets underway.",
+  },
+  {
+    when: "1995",
+    text: "Shrinivas V. Dempo completed a Master of Science in Industrial Administration and Finance at Carnegie Mellon University. His bachelor’s and master’s degrees from the University of Mumbai are dated 1990 and 1992.",
+  },
+  {
+    when: "28 November 1999",
+    text: "Death of former chairman Vasudeva V. Dempo. The site marked the twentieth anniversary on 28 November 2019 and the twenty-fifth on 28 November 2024, both with a blood donation drive at Dempo House.",
+  },
+  {
+    when: "2000",
+    text: "Memorial essays on the site, including pieces dated October 2000, refer to Vasantrao as the late founder. The essay that also prints a birth year is not used for that year.",
+  },
+  {
+    when: "7 July 2004",
+    text: "GOA 365 launched. It came under the Group’s direct editorial and administrative supervision in January 2016.",
+  },
+  {
+    when: "October 2006",
+    text: "A memorandum with the Government of Maharashtra for processing low-iron material in Sindhudurg, under V. S. Dempo Mining Corporation Pvt. Ltd.",
+  },
+  {
+    when: "June 2009",
+    text: "The Group’s editorial note states that V. S. Dempo & Co. and Dempo Mining Corporation, the iron ore mining and logistics businesses, were divested to Sesa Goa Ltd, since named Vedanta Ltd.",
+  },
+  {
+    when: "2010",
+    text: "The Vasudeva V. Dempo Climate Change Awareness Programme with TERI was launched, in the seventy-fifth anniversary year of his birth. Shrinivas Dempo was named among the 50 most influential people in Indian sports by Sports Illustrated, and became president of the Goa Football Association, serving until July 2014.",
+  },
+  {
+    when: "2013",
+    text: "Vanity Case Group bought a controlling stake in Hindustan Foods. Shrinivas Dempo was named honorary vice consul of Italy in Goa. Project STARS with TERI was launched in August.",
+  },
+  {
+    when: "2014",
+    text: "Enterprise Asia honoured him with the Asia Pacific Outstanding Entrepreneurship Award India, in his capacity as chairman of Goa Carbon.",
+  },
+  {
+    when: "2017",
+    text: "He was Goa venue director for the local organising committee of the FIFA U-17 World Cup.",
+  },
+  {
+    when: "2019",
+    text: "Elected a member of the Board of Trustees of Carnegie Mellon University.",
+  },
+  {
+    when: "2020",
+    text: "Received the Tepper Achievement Award.",
+  },
+  {
+    when: "25 May 2021",
+    text: "Appointed additional director of Kirloskar Brothers Limited.",
+  },
+  {
+    when: "1 July 2023",
+    text: "Elected president of the Goa Chamber of Commerce and Industry.",
+  },
+  {
+    when: "4 March 2024",
+    text: "At the head office, chairman Shrinivas Dempo garlanded the founder’s statue. Pallavi Dempo and Yatish Dempo attended. The post is titled as a numbered birth anniversary. The year of birth is left for the client to confirm.",
+  },
+];
+---
+
+<Base
+  title="About and legacy"
+  description="The Dempo legacy in Goa: a family name of half a millennium, a modern business house from 1941, and a timeline drawn only from dates published on dempos.com."
+>
+  <section class="page-hero" aria-label="About">
+    <div class="hero-media">
+      <Image
+        src={hero}
+        alt="Side elevation of the Basilica of Bom Jesus at Old Goa, in laterite stone."
+        widths={[800, 1400, 1920]}
+        sizes="100vw"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="hero-shade"></div>
+    </div>
+    <p class="hero-credit">Basilica of Bom Jesus · iMahesh · CC BY-SA 4.0</p>
+    <div class="hero-copy">
+      <span class="kicker">About</span>
+      <h1>A Goan house, still in the making.</h1>
+      <p>
+        Old Goa’s Basilica of Bom Jesus. The Dempo ancestral seat is at Santa Cruz;
+        the photograph is of the city they have lived alongside, not of a Group property.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap split" data-reveal>
+      <div class="prose">
+        <span class="kicker">The house</span>
+        <h2>Leading corporate group of Goa, by its own account.</h2>
+        <p>
+          The About page calls the Dempo business house the leading corporate group of Goa,
+          with modern-era operations from 1941. The activities it names are calcined
+          petroleum coke, shipbuilding and repair, newspaper publishing and the media,
+          manufacture of pig iron, baby foods, real estate, sports promotion, travel,
+          renewable energy, and mining. An editorial note on the site says the Goa iron-ore
+          mining and logistics businesses were divested in June 2009.
+          [Placeholder: client to confirm] which of the other lines are still current.
+          A staff figure printed on the About page is undated, so it is not repeated.
+        </p>
+        <p>
+          The businesses were pioneered by the late Vasantrao S. Dempo, whose work in Goan
+          industry earned a Padma Shri, and by his brother, the late Vaikunthrao S. Dempo.
+          Vasantrao’s son, the late Vasudeva V. Dempo, consolidated the industrial activities.
+          The chair is held by Vasudeva’s son, Shrinivas V. Dempo. His wife, Pallavi S. Dempo,
+          an MBA from Pune University, handles the media businesses and the charitable trusts.
+        </p>
+        <p>
+          A restructuring created the parent, V. S. Dempo Holdings Pvt. Ltd., with the other
+          group companies as its subsidiaries. Growth is described as both organic and
+          inorganic — shipbuilding, calcined petroleum coke, media and sport — and
+          geographical, across western, central, southern and eastern India, and overseas
+          to China and Denmark.
+        </p>
+      </div>
+      <figure class="figure" data-reveal>
+        <Image
+          src={founder}
+          alt="Black and white portrait of Vasantrao S. Dempo, founder chairman, in a suit and tie."
+          widths={[500, 800]}
+          sizes="(min-width: 800px) 480px, 100vw"
+        />
+        <figcaption>
+          Vasantrao S. Dempo, founder chairman. Portrait published with The Legend Endures on dempos.com.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 0">
+    <div class="wrap" data-reveal>
+      <span class="kicker">Dates published on dempos.com</span>
+      <h2 class="quote">A timeline with nothing added.</h2>
+      <ol class="timeline">
+        {
+          timeline.map((item) => (
+            <li>
+              <time>{item.when}</time>
+              <p>{item.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="muted">
+        Where two pages disagree — the start of Goa Carbon, the start of Dempo Travels —
+        both wordings are kept. The founder’s year of birth is omitted until the client confirms it.
+      </p>
+    </div>
+  </section>
+
+  <section class="section band">
+    <div class="wrap split" data-reveal>
+      <div>
+        <span class="kicker">Direction</span>
+        <h2 class="quote" style="color: white">Vision, mission, values.</h2>
+      </div>
+      <div>
+        <h3 style="font-size: 1.6rem; margin-bottom: 0.4rem">Vision</h3>
+        <p>
+          To become one of the top five most admired business houses in the country, by a
+          strategy that weds excellence in operations to corporate responsibility.
+        </p>
+        <h3 style="font-size: 1.6rem; margin-bottom: 0.4rem">Mission</h3>
+        <p>
+          Commercial activity at the cutting edge of professionalism, suffused with social
+          responsibility in India, while acquiring a larger global profile.
+        </p>
+        <h3 style="font-size: 1.6rem; margin-bottom: 0.4rem">Values</h3>
+        <p>Integrity, fairness, solicitude, teamwork, innovation and social responsibility.</p>
+        <p class="muted">
+          The chairman’s address also names ethics, customer delight, quality and social
+          responsibility as the core the Group swears by.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap prose" data-reveal>
+      <span class="kicker">How the house describes itself</span>
+      <h2>Governance, research, and the people it has worked with.</h2>
+      <p>
+        On corporate governance, the About page says good corporate actions balance the
+        interests of all stakeholders while satisfying accountability, transparency and fair play.
+        Under the current chair, the same page credits expansion, mergers and acquisitions,
+        new lines of activity, ISO benchmarking, CSR programmes, people systems, enterprise
+        resource planning and sustainability reporting.
+      </p>
+      <p>
+        Research recorded there includes a low-phosphorus magnetite concentrate for the
+        former iron-ore business, an instant porridge formula for the foods business, and a
+        blending process for raw petroleum coke so calcined product stayed consistent when
+        good-grade feedstock was scarce.
+      </p>
+      <h3>Associates named on the site</h3>
+      <p>
+        For the former mining and export business: Nippon Steel Corporation and Mitsui.
+        For foods, past and present: Glaxo, Dumex and Heinz. For shipbuilding: the Indian
+        Navy, Larsen & Toubro, the National Institute of Ocean Technology, Mundhra Port & SEZ,
+        United Shippers, M. Pallonji, Jindal ITF and Adani Enterprises. For petroleum coke:
+        Rio Tinto, Aluminium Pechiney, DUBAL, NALCO, HINDALCO, INDAL, TELCO, BHEL and Jindal Steel.
+      </p>
+      <p>
+        <a href="https://www.dempos.com/about-us/">About page on dempos.com</a>
+        ·
+        <a href="https://www.dempos.com/the-legend-endures/">The Legend Endures</a>
+        ·
+        <a href="https://www.dempos.com/first-among-equals/">First Among Equals</a>
+      </p>
+    </div>
+  </section>
+</Base>

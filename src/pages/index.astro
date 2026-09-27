@@ -1,0 +1,149 @@
+---
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import hero from "../assets/photos/hero-mandovi.jpg";
+import chairman from "../assets/photos/chairman.jpg";
+import { businesses } from "../data/businesses";
+import { stories } from "../data/news";
+
+const featured = stories.slice(0, 3);
+---
+
+<Base
+  title="The House of Dempo"
+  description="Concept redesign for The Dempo Group of Goa. Responsible business since the modern house broke ground in 1941, with a family name bound up with Goa for half a millennium."
+>
+  <section class="hero" aria-label="Introduction">
+    <div class="hero-media">
+      <Image
+        src={hero}
+        alt="Fishing boats on the Mandovi River at Panaji, Goa, with the city behind them."
+        widths={[800, 1400, 1920]}
+        sizes="100vw"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="hero-shade"></div>
+    </div>
+    <p class="hero-credit">Vyacheslav Argenberg · CC BY 4.0</p>
+    <div class="hero-copy">
+      <span class="kicker">The House of Dempo · Panaji</span>
+      <h1>Responsible business, the way to growing sustainably.</h1>
+      <p>
+        The Dempo business house broke ground in 1941 with iron ore mining and export.
+        The name itself is bound up with Goan history for half a millennium.
+      </p>
+      <div class="hero-actions">
+        <a href="/businesses">The businesses</a>
+        <a href="/about">The legacy</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap split" data-reveal>
+      <div>
+        <span class="kicker">The differentiator</span>
+        <p class="quote">Ethics is the differentiator that sets us apart.</p>
+        <p class="muted">From the Group’s account of its business model.</p>
+      </div>
+      <div class="prose">
+        <p>
+          Profit tempered by ethics is the way the corporate group describes its model.
+          The values directors and employees are expected to follow are integrity, fairness,
+          solicitude, teamwork, innovation and social responsibility.
+        </p>
+        <p>
+          The long-term vision published on the site is to become one of the top five most
+          admired business houses in the country, by wedding excellence in operations to
+          corporate responsibility. The holding company is V. S. Dempo Holdings Pvt. Ltd.
+        </p>
+        <p><a href="/about">Read the legacy</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 0">
+    <div class="wrap" data-reveal>
+      <span class="kicker">Companies</span>
+      <h2 class="quote" style="max-width: 18ch; margin-bottom: 1.5rem">The companies menu, and the work still taking shape.</h2>
+      <div class="rule-list">
+        {
+          businesses.map((business, index) => (
+            <a href={`/businesses/${business.slug}`}>
+              <span class="row-index">{String(index + 1).padStart(2, "0")}</span>
+              <span class="row-title">{business.name}</span>
+              <span class="muted">{business.lede}</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section band">
+    <div class="wrap split uneven" data-reveal>
+      <figure class="figure portrait">
+        <Image
+          src={chairman}
+          alt="Shrinivas V. Dempo, chairman of the Dempo Group, seated in a dark suit."
+          widths={[400, 700]}
+          sizes="(min-width: 800px) 420px, 100vw"
+        />
+        <figcaption>Photograph: The Art of Blinks / Incredible Goa, as credited on dempos.com.</figcaption>
+      </figure>
+      <div>
+        <span class="kicker">Chairman</span>
+        <h2 class="quote" style="color: white; max-width: 16ch">Shrinivas V. Dempo</h2>
+        <p>
+          Chairman of the Goa-based Dempo Group, with interests the profile lists as calcined
+          petroleum coke, shipbuilding, food processing, real estate and newspaper publishing.
+          He took a Master of Science in Industrial Administration and Finance from Carnegie
+          Mellon University in 1995, and in 2019 was elected to its Board of Trustees.
+        </p>
+        <p>
+          <a href="/leadership">Leadership and the chairman’s address</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap" data-reveal>
+      <span class="kicker">From the public record</span>
+      <h2 class="quote" style="margin-bottom: 1rem">Recent notes from dempos.com</h2>
+      <div class="news-list">
+        {
+          featured.map((story) => (
+            <article>
+              <p class="meta">{story.date} · {story.category}</p>
+              <h3>{story.title}</h3>
+              <p class="muted">{story.summary}</p>
+              <a href={story.source}>Source on dempos.com</a>
+            </article>
+          ))
+        }
+      </div>
+      <p style="margin-top: 1.5rem"><a href="/news">All news in this concept</a></p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 0">
+    <div class="wrap split" data-reveal>
+      <div>
+        <span class="kicker">In Goa</span>
+        <h2 class="quote">Higher education, sport, culture, conservation, health, and a fairer start.</h2>
+      </div>
+      <div>
+        <p>
+          The site names six pillars of the Group’s engagement with Goan society: higher
+          education, sporting excellence, Goan culture, environmental conservation,
+          affirmative action, and health and sanitation. The work runs through
+          V. S. Dempo Holdings, the Vasantrao Dempo Education & Research Foundation,
+          the Dempo Charities Trust, and the Dempo Higher Secondary School of Science Trust.
+        </p>
+        <p><a href="/sustainability">Sustainability and CSR</a></p>
+      </div>
+    </div>
+  </section>
+</Base>

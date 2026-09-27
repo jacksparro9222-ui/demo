@@ -1,0 +1,5 @@
+# Concept redesign. Every page also sends a noindex meta tag.
+User-agent: *
+Allow: /
+
+Sitemap: https://dempo-concept.galactis.ai/sitemap-index.xml

@@ -1,0 +1,63 @@
+---
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import photo from "../assets/photos/careers.jpg";
+---
+
+<Base
+  title="Careers"
+  description="How to approach the Dempo Group for work: the address and inbox published on dempos.com. No vacancies are invented."
+>
+  <section class="section">
+    <div class="wrap split" data-reveal>
+      <div class="prose">
+        <span class="kicker">Careers</span>
+        <h1 style="font-size: clamp(3rem, 6vw, 4.8rem)">The house as an employer.</h1>
+        <p class="lede">
+          The careers page welcomes readers to the House of Dempo as a Goa-based business
+          group and an employer of choice. It does not list open roles.
+        </p>
+        <p>
+          <span class="tag">[Placeholder: client to supply]</span>
+        </p>
+        <p>
+          Current vacancies, disciplines and locations are not published on the careers
+          page that was studied. This concept will not invent job openings. When the Group
+          shares a live list, it belongs here.
+        </p>
+        <h2>How the site asks people to apply</h2>
+        <p>
+          Complete the online application on dempos.com, or post a CV to the General Manager,
+          Human Resources. The homepage uses a different title for the same desk: Senior
+          General Manager (Human Resources). Both are reproduced rather than merged.
+        </p>
+        <address class="address">
+          General Manager – Human Resources<br />
+          Dempo Group of Companies<br />
+          Dempo House, Campal<br />
+          Dayanand Bandodkar Road<br />
+          P. O. Box 34, Panaji 403001<br />
+          Goa, India
+        </address>
+        <p style="margin-top: 1rem">
+          <a href="https://www.dempos.com/careers/online-application-form/">
+            Online application on dempos.com
+          </a>
+        </p>
+        <p class="muted">
+          That form belongs to the live site. The form on this concept’s contact page does
+          not submit anywhere.
+        </p>
+      </div>
+      <figure class="figure" data-reveal>
+        <Image
+          src={photo}
+          alt="A classroom discussion, the photograph used on the Dempo careers page."
+          widths={[500, 900]}
+          sizes="(min-width: 800px) 46vw, 100vw"
+        />
+        <figcaption>Photograph from the careers page on dempos.com. The people are not identified there.</figcaption>
+      </figure>
+    </div>
+  </section>
+</Base>

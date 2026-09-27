@@ -1,0 +1,76 @@
+---
+import { Image } from "astro:assets";
+import Base from "../../layouts/Base.astro";
+import { businesses, furtherActivities } from "../../data/businesses";
+import wind from "../../assets/photos/wind.jpg";
+---
+
+<Base
+  title="Businesses"
+  description="The Dempo companies as published on dempos.com: calcined petroleum coke, foods, shipbuilding, media, real estate, football, travel, and ventures still in development."
+>
+  <section class="section">
+    <div class="wrap prose" data-reveal>
+      <span class="kicker">Businesses</span>
+      <h1 style="font-size: clamp(3rem, 7vw, 5.5rem); max-width: 14ch">What the public menu still lists.</h1>
+      <p class="lede">
+        dempos.com carries ten company pages. Hindustan Foods is one of them; after 2013 its
+        place in the Group is marked for the client to confirm. Project notes that still read
+        as they did around 2015 are summarised as published, not as a current status.
+      </p>
+    </div>
+  </section>
+
+  <div class="wrap">
+    {
+      businesses.map((business) => (
+        <article class="biz-block" id={business.slug} data-reveal>
+          <figure class="figure">
+            <Image
+              src={business.image}
+              alt={business.imageAlt}
+              widths={[480, 800, 1200]}
+              sizes="(min-width: 800px) 42vw, 100vw"
+            />
+            <figcaption>
+              {business.imageCredit ? business.imageCredit : "Photograph published on dempos.com."}
+            </figcaption>
+          </figure>
+          <div>
+            <span class="kicker">{business.kicker}</span>
+            <h2>{business.name}</h2>
+            <p class="lede" style="margin-top: 0.8rem">{business.lede}</p>
+            <p>{business.paragraphs[0]}</p>
+            <p>
+              <a href={`/businesses/${business.slug}`}>The full note</a>
+            </p>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+
+  <section class="section">
+    <div class="wrap split" data-reveal>
+      <figure class="figure">
+        <Image
+          src={wind}
+          alt="Wind turbines in the Thar Desert, Rajasthan, India."
+          widths={[600, 1000]}
+          sizes="(min-width: 800px) 50vw, 100vw"
+        />
+        <figcaption>Wind turbines in the Thar Desert. Vyacheslav Argenberg, CC BY 4.0. Not a Dempo installation.</figcaption>
+      </figure>
+      <div class="prose">
+        <span class="kicker">Also on the record</span>
+        <h2>{furtherActivities.title}</h2>
+        {furtherActivities.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        <p>
+          <a href={furtherActivities.source}>The Good Earth</a>
+          ·
+          <a href={furtherActivities.divestmentSource}>Editorial note on the 2009 divestment</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>

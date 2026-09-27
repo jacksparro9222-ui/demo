@@ -1,0 +1,97 @@
+---
+import { Image } from "astro:assets";
+import Base from "../../layouts/Base.astro";
+import { businesses } from "../../data/businesses";
+
+export function getStaticPaths() {
+  return businesses.map((business) => ({
+    params: { slug: business.slug },
+    props: { business },
+  }));
+}
+
+const { business } = Astro.props;
+const others = businesses.filter((item) => item.slug !== business.slug);
+---
+
+<Base title={business.name} description={business.lede}>
+  <article class="section">
+    <div class="wrap split uneven">
+      <div data-reveal>
+        <span class="kicker">{business.kicker}</span>
+        <h1 style="font-size: clamp(2.8rem, 6vw, 4.6rem)">{business.name}</h1>
+        <p class="lede" style="margin-top: 1rem">{business.lede}</p>
+        {business.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        {
+          business.note && (
+            <p>
+              <span class="tag">Note from the source pages</span>
+            </p>
+          )
+        }
+        {business.note && <p class="muted">{business.note}</p>}
+        <p>
+          <a href={business.source}>Company page on dempos.com</a>
+          {
+            business.website && (
+              <>
+                {" "}
+                · <a href={business.website.href}>{business.website.label}</a>
+              </>
+            )
+          }
+        </p>
+      </div>
+      <div data-reveal>
+        <figure class="figure">
+          <Image
+            src={business.image}
+            alt={business.imageAlt}
+            widths={[600, 1000, 1400]}
+            sizes="(min-width: 800px) 46vw, 100vw"
+          />
+          <figcaption>
+            {business.imageCredit ? business.imageCredit : "Photograph published on dempos.com."}
+          </figcaption>
+        </figure>
+        <dl class="facts">
+          {
+            business.facts.map((fact) => (
+              <div>
+                <dt>{fact.label}</dt>
+                <dd>{fact.value}</dd>
+              </div>
+            ))
+          }
+        </dl>
+        <h2 style="font-size: 1.6rem; margin: 2rem 0 0.6rem">Contact</h2>
+        <address class="address">
+          {business.contact.map((line) => (
+            <span>
+              {line}
+              <br />
+            </span>
+          ))}
+        </address>
+      </div>
+    </div>
+  </article>
+
+  <section class="section" style="padding-top: 0">
+    <div class="wrap">
+      <span class="kicker">Also in the group</span>
+      <div class="rule-list">
+        {
+          others.slice(0, 4).map((item) => (
+            <a href={`/businesses/${item.slug}`}>
+              <span class="row-index">{item.kicker}</span>
+              <span class="row-title">{item.name}</span>
+              <span class="muted">{item.lede}</span>
+            </a>
+          ))
+        }
+      </div>
+      <p style="margin-top: 1.5rem"><a href="/businesses">All businesses</a></p>
+    </div>
+  </section>
+</Base>

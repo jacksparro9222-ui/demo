@@ -1,0 +1,209 @@
+---
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import education from "../assets/photos/education.jpg";
+import teri from "../assets/photos/teri.jpg";
+import ambassadors from "../assets/photos/ambassadors.jpg";
+
+const pillars = [
+  "Higher education",
+  "Sporting excellence",
+  "Goan culture",
+  "Environmental conservation",
+  "Affirmative action",
+  "Health and sanitation",
+];
+---
+
+<Base
+  title="Sustainability and CSR"
+  description="Dempo corporate social responsibility as published: education trusts, scholarships, Dempo Vishwa Gramshala, TERI programmes, and goodwill ambassadors in sport."
+>
+  <section class="section">
+    <div class="wrap" data-reveal>
+      <span class="kicker">Sustainability</span>
+      <h1 style="font-size: clamp(3rem, 7vw, 5.4rem); max-width: 14ch">People and planet, written into the house.</h1>
+      <p class="lede" style="margin-top: 1rem">
+        The CSR page says decades of work with communities, mainly in Goa, made People and
+        Planet second nature in the pursuit of Profit, and that the Group goes beyond the
+        law in corporate citizenship. A population figure for Goa on the About page is
+        undated, so it is not repeated. [Placeholder: client to confirm]
+      </p>
+      <ul class="pillars">
+        {pillars.map((pillar) => <li>{pillar}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 0">
+    <div class="wrap split" data-reveal>
+      <figure class="figure">
+        <Image
+          src={education}
+          alt="Students and a campus scene from the Dempo Charities Trust photography on dempos.com."
+          widths={[500, 900]}
+          sizes="(min-width: 800px) 46vw, 100vw"
+        />
+        <figcaption>Dempo Charities Trust, as published on the CSR page.</figcaption>
+      </figure>
+      <div class="prose">
+        <span class="kicker">Dempo Charities Trust</span>
+        <h2>Commitment to excellence, and quality education for all.</h2>
+        <p>
+          That is the motto on the trust’s page. The trust manages four institutions,
+          affiliated to the Goa Board and Goa University:
+        </p>
+        <ul>
+          <li>Dhempe College of Arts and Science, Miramar, established 1962.</li>
+          <li>Srinivassa Sinai Dempo College of Commerce & Economics, established 1966, with a campus the news pages place at Cujira.</li>
+          <li>Vasantrao Dempo Higher Secondary School of Arts & Science, Miramar, 1975.</li>
+          <li>Voicuntrao Sinai Dempo Higher Secondary School of Commerce, Miramar, 1975.</li>
+        </ul>
+        <p>
+          The trust page says scholarships and financial assistance reach hundreds of
+          students, and that twenty-five scholarships were instituted in memory of
+          Vasantrao Sinai Dempo for students from Santa Cruz, the ancestral village.
+          The rupee total printed beside that aid is undated and is not repeated.
+          [Placeholder: client to confirm] It also supports music, theatre and festivals
+          of Goan tradition.
+        </p>
+        <p>
+          The Vasudeva V. Dempo Memorial Lecture Series has had, as guest orators, the
+          country’s former prime minister, the head of its largest private bank, and the head
+          of its largest private steel company. The page does not name them.
+        </p>
+        <p>
+          A separate Dempo Higher Secondary School of Science Trust runs an integrated board
+          and competitive-exam model with IIT-ians PACE at the Miramar complex, described as
+          Dempo PACE.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band">
+    <div class="wrap prose" data-reveal>
+      <span class="kicker">Scholarships, 2026–27</span>
+      <h2 style="color: white">Dempo Charities Trust scholarships</h2>
+      <p>
+        The scheme supports meritorious Goan students in postgraduate, research or
+        professional programmes in Goa or at institutions of repute elsewhere in India.
+        Students enrolled in foreign colleges are not eligible, nor is anyone already
+        holding another scholarship or freeship. Up to half the scholarships are earmarked
+        for girl students. The amount covers tuition fee, in full or in part.
+      </p>
+      <p>
+        The 2026 notice says the scheme is notified on 27 September 2026, with online
+        applications from 27 September to 10 October 2026. Family-income papers refer to
+        2025–26, with a threshold of ₹5 lakh a year between a government income certificate
+        and income-tax returns. Rajesh R. Bhatikar signs as administrator.
+      </p>
+      <p>
+        Lists of recipients for 2023, 2024 and 2025 are published on dempos.com as images.
+        They are not retyped here.
+      </p>
+      <p>
+        <a href="https://www.dempos.com/dempo-charities-trust-scholarships-2026/">2026 scheme</a>
+        ·
+        <a href="https://www.dempos.com/list-of-recipients-of-dct-scholarships-2025/">2025 recipients</a>
+        ·
+        <a href="https://www.dempos.com/list-of-recipients-of-dct-scholarships-2024/">2024 recipients</a>
+        ·
+        <a href="https://www.dempos.com/list-of-recipients-dct-scholarships-2023/">2023 recipients</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap split" data-reveal>
+      <div class="prose">
+        <span class="kicker">Schools</span>
+        <h2>Dempo Vishwa Gramshala</h2>
+        <p>
+          Dempo Vishwa Gramshala is an educational programme of the Vasantrao Dempo
+          Education & Research Foundation, run with the Directorate of Education. A
+          three-year engagement from 2023 with Government High School Kasarpal and
+          Government High School Sal has been completed. A further adoption, under an MoU
+          signed in March 2026, covers Government High School Kirlawada, Chimbel, and Ideal
+          High School, Piligao, for 2026–2029.
+        </p>
+        <span class="kicker" style="margin-top: 2rem">Research</span>
+        <h2>Vasantrao Dempo Education & Research Foundation</h2>
+        <p>
+          The CSR page describes Dempo Research Fellowships for Goa-centric study, with two
+          books published — Kaleidoscope Goa, an encyclopaedia of Goan art and culture, and
+          The Goan Village Communes, on the communidades — and a third in progress at the
+          time of writing. It also describes an ethnographic project on rural Goa, with
+          particular relevance to women, children, health and civil governance.
+        </p>
+      </div>
+      <figure class="figure">
+        <Image
+          src={teri}
+          alt="Students in a TERI and Dempo environmental education activity."
+          widths={[500, 900]}
+          sizes="(min-width: 800px) 46vw, 100vw"
+        />
+        <figcaption>TERI and Dempo, from the CSR page.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 0">
+    <div class="wrap split" data-reveal>
+      <figure class="figure">
+        <Image
+          src={ambassadors}
+          alt="Dempo goodwill ambassadors in sport, from the Group CSR photography."
+          widths={[500, 900]}
+          sizes="(min-width: 800px) 46vw, 100vw"
+        />
+        <figcaption>Goodwill ambassadors page on dempos.com. Ages printed there are not repeated, because the page is undated.</figcaption>
+      </figure>
+      <div class="prose">
+        <span class="kicker">Sport and climate</span>
+        <h2>Ambassadors, TERI, and older gifts.</h2>
+        <p>
+          Dempo Goodwill Ambassadors, a scheme introduced by the chairman, has supported
+          Natasha Palha in lawn tennis, Anurag Mhamal in chess and Tanisi Kirtani in table
+          tennis. Past support named on the page includes Ivana Furtado in chess, Talasha
+          Prabhu in swimming and Akanksha Salunkhe in squash. Ages printed on that undated
+          page are not repeated. Goa Carbon has supported Bhakti Kulkarni in chess, and in
+          June 2025 named badminton player Aarush Pawaskar a goodwill ambassador.
+        </p>
+        <p>
+          With The Energy and Resources Institute, the Group launched the Vasudeva V. Dempo
+          Climate Change Awareness Programme in 2010, for students and teachers from thirty
+          schools. Project STARS — Sustainability Tracking, Action and Reporting in Schools —
+          followed in August 2013, a three-year programme with ten schools. A later note on
+          the site says the three-year project came to a close.
+        </p>
+        <p>
+          The Group has also partnered the Confederation of Indian Industry on affirmative
+          action for professional study among underprivileged communities.
+        </p>
+        <p>
+          A 2000 account records a Vasudeva V. Dempo Conference Centre at the Goa Institute
+          of Management, costing Rs 10.20 lakh and borne by V. S. Dempo & Co., and gifts of
+          Rs 12 lakh each — Rs 24 lakh in all — to the Rotary Foundation in memory of
+          Vaikunthrao Dempo and Vasudeva V. Dempo. The second endowment was created by
+          Shrinivas V. Dempo with his mother, Neela V. Dempo.
+        </p>
+        <h3>Policies and filings</h3>
+        <p>
+          CSR policies are published for V. S. Dempo Holdings, Dempo Shipbuilding &
+          Engineering, and Dempo Industries, plus a Dempo Industries CSR project note for
+          2025–26. Annual returns for 2023–24 and 2024–25 are posted for Dempo Industries,
+          Dempo Sports Club, V. S. Dempo Holdings, and Dempo Shipbuilding & Engineering.
+        </p>
+        <p>
+          <a href="https://www.dempos.com/csr/">CSR</a>
+          ·
+          <a href="https://www.dempos.com/csr/csr-policies/">Policies</a>
+          ·
+          <a href="https://www.dempos.com/csr/statutory-filings/">Statutory filings</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>

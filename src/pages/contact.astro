@@ -1,0 +1,128 @@
+---
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import photo from "../assets/photos/panjim-square.jpg";
+import { businesses } from "../data/businesses";
+---
+
+<Base
+  title="Contact"
+  description="Dempo House, Campal, Panaji: the headquarters address, phone and email as published on dempos.com, with a demonstration form that does not send."
+>
+  <section class="section">
+    <div class="wrap split" data-reveal>
+      <div>
+        <span class="kicker">Contact</span>
+        <h1 style="font-size: clamp(3rem, 6vw, 4.8rem)">Dempo House, Campal.</h1>
+        <p class="lede">
+          Corporate headquarters, as printed on the contact page.
+        </p>
+        <address class="address" style="font-size: 1.15rem; line-height: 1.6">
+          Dempo Group of Companies<br />
+          Dempo House, Campal<br />
+          Dayanand Bandodkar Road<br />
+          P. O. Box 34<br />
+          Panaji 403001, Goa, India
+        </address>
+        <dl class="facts">
+          <div>
+            <dt>Telephone</dt>
+            <dd><a href="tel:+918322441300">+91 832 2441300</a></dd>
+          </div>
+          <div>
+            <dt>Also printed</dt>
+            <dd>
+              +91 832 2225098 / 2228588
+              <span class="muted" style="display: block; margin-top: 0.35rem">
+                Company pages call these fax numbers. The contact page prints them without a label.
+                [Placeholder: client to confirm]
+              </span>
+            </dd>
+          </div>
+          <div>
+            <dt>Email</dt>
+            <dd><a href="mailto:mail@dempos.com">mail@dempos.com</a></dd>
+          </div>
+          <div>
+            <dt>Website</dt>
+            <dd><a href="https://www.dempos.com/">www.dempos.com</a></dd>
+          </div>
+          <div>
+            <dt>CSR desk</dt>
+            <dd>Head of Corporate Social Responsibility, same address, board line 0832-2441300</dd>
+          </div>
+        </dl>
+      </div>
+      <figure class="figure" data-reveal>
+        <Image
+          src={photo}
+          alt="Church square in Panaji, Goa, with the white façade of Our Lady of the Immaculate Conception."
+          widths={[600, 1100]}
+          sizes="(min-width: 800px) 46vw, 100vw"
+        />
+        <figcaption>
+          Panaji church square. Aren Noronha, CC BY-SA 3.0. The headquarters is at Campal, not in this square.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 0">
+    <div class="wrap two">
+      <div data-reveal>
+        <span class="kicker">Demonstration only</span>
+        <h2 class="quote" style="font-size: 2.6rem; margin-bottom: 1rem">Write to the house.</h2>
+        <form class="form" data-demo-form novalidate>
+          <label>
+            Name
+            <input name="name" type="text" autocomplete="name" required />
+          </label>
+          <label>
+            Email
+            <input name="email" type="email" autocomplete="email" required />
+          </label>
+          <label>
+            Subject
+            <select name="subject">
+              <option>General enquiry</option>
+              <option>Business</option>
+              <option>Careers</option>
+              <option>CSR and scholarships</option>
+              <option>Media</option>
+            </select>
+          </label>
+          <label>
+            Message
+            <textarea name="message" required></textarea>
+          </label>
+          <button type="submit">Send message</button>
+          <p class="form-note" data-form-note role="status"></p>
+          <p class="muted">
+            The button does not transmit anything. It is here so the layout of a future
+            enquiry form can be judged.
+          </p>
+        </form>
+      </div>
+      <div data-reveal>
+        <span class="kicker">Company desks</span>
+        <h2 class="quote" style="font-size: 2.4rem; margin-bottom: 0.5rem">Where each page says to write.</h2>
+        {
+          businesses
+            .filter((item) => item.slug !== "emerging")
+            .map((item) => (
+              <article style="padding: 1rem 0; border-top: 1px solid var(--line)">
+                <h3 style="font-size: 1.45rem">
+                  <a href={`/businesses/${item.slug}`}>{item.name}</a>
+                </h3>
+                <p class="muted" style="margin: 0.35rem 0 0">
+                  {item.contact[0]}
+                  <br />
+                  {item.contact.find((line) => line.toLowerCase().includes("phone")) ?? ""}
+                </p>
+              </article>
+            ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>
