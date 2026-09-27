@@ -47,10 +47,12 @@ const fullTitle = title.includes("Dempo") ? title : `${title} · The House of De
   <body>
     <a class="skip" href="#content">Skip to content</a>
     <Header />
-    <main id="content">
-      <slot />
-    </main>
-    <Footer />
+    <div class="page-shell" data-page-shell>
+      <main id="content">
+        <slot />
+      </main>
+      <Footer />
+    </div>
     <script>
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       const nodes = [...document.querySelectorAll("[data-reveal]")];
@@ -98,30 +100,44 @@ const fullTitle = title.includes("Dempo") ? title : `${title} · The House of De
 
       const toggle = document.querySelector("[data-nav-toggle]");
       const panel = document.querySelector("[data-nav-panel]");
+      const shell = document.querySelector("[data-page-shell]");
       const main = document.querySelector("main");
       const footer = document.querySelector(".site-footer");
       const mobileNav = window.matchMedia("(max-width: 860px)");
       let scrollY = 0;
 
+      const stopTouch = (event) => {
+        const target = event.target;
+        if (panel instanceof HTMLElement && target instanceof Node && panel.contains(target)) return;
+        event.preventDefault();
+      };
+
       const lockScroll = () => {
         scrollY = window.scrollY;
-        document.body.style.position = "fixed";
-        document.body.style.top = `-${scrollY}px`;
-        document.body.style.left = "0";
-        document.body.style.right = "0";
-        document.body.style.width = "100%";
+        if (shell instanceof HTMLElement) {
+          const top = shell.getBoundingClientRect().top;
+          shell.style.position = "fixed";
+          shell.style.top = `${top}px`;
+          shell.style.left = "0";
+          shell.style.right = "0";
+          shell.style.width = "100%";
+        }
         document.documentElement.classList.add("nav-open");
+        document.addEventListener("touchmove", stopTouch, { passive: false });
       };
 
       const unlockScroll = () => {
-        const y = Math.abs(parseInt(document.body.style.top || "0", 10)) || scrollY;
+        const y = scrollY;
         const root = document.documentElement;
         root.classList.remove("nav-open");
-        document.body.style.position = "";
-        document.body.style.top = "";
-        document.body.style.left = "";
-        document.body.style.right = "";
-        document.body.style.width = "";
+        document.removeEventListener("touchmove", stopTouch);
+        if (shell instanceof HTMLElement) {
+          shell.style.position = "";
+          shell.style.top = "";
+          shell.style.left = "";
+          shell.style.right = "";
+          shell.style.width = "";
+        }
         const behavior = root.style.scrollBehavior;
         root.style.scrollBehavior = "auto";
         window.scrollTo(0, y);

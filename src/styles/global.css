@@ -127,9 +127,8 @@ p {
   border-bottom: 1px solid var(--line);
 }
 
-/* Blur lives on a pseudo-element. backdrop-filter on the header itself
-   would make it the containing block for the fixed menu and let the
-   closed panel leak its first link ("About") onto the page. */
+/* Blur lives on a pseudo-element so the header never becomes a
+   containing block. The menu itself is a sibling after the header. */
 .site-header::before {
   content: "";
   position: absolute;
@@ -244,6 +243,26 @@ p {
   transform: rotate(-45deg);
 }
 
+/* The menu is not inside the sticky header. On phones, a fixed panel
+   nested in that header is clipped to the header strip, so opening it
+   showed only "About". Desktop keeps the links over the right side of
+   the bar; the panel itself does not take clicks. */
+.nav-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  height: var(--header);
+  width: min(1280px, calc(100% - 2.5rem));
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  pointer-events: none;
+  background: transparent;
+}
+
 .nav-list {
   display: flex;
   align-items: center;
@@ -251,6 +270,7 @@ p {
   list-style: none;
   margin: 0;
   padding: 0;
+  pointer-events: auto;
 }
 
 .nav-list a {
@@ -812,9 +832,12 @@ html.js [data-reveal].is-in {
   }
 }
 
-html.nav-open,
-html.nav-open body {
+html.nav-open {
   overflow: hidden;
+}
+
+html.nav-open .site-header {
+  background: #f4f1eb;
 }
 
 @media (max-width: 860px) {
@@ -840,39 +863,50 @@ html.nav-open body {
   }
 
   .nav-panel {
-    position: fixed;
-    inset: 0;
-    z-index: 1;
-    background: var(--paper);
-    padding: calc(var(--header) + 0.75rem) 1.5rem 2rem;
-    overflow: auto;
-    overscroll-behavior: contain;
-    visibility: hidden;
-    opacity: 0;
-    pointer-events: none;
-    clip-path: inset(0 0 100% 0);
+    display: none;
   }
 
   .nav-panel.is-open {
-    visibility: visible;
-    opacity: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    width: auto;
+    height: 100%;
+    height: 100dvh;
+    margin: 0;
+    background-color: #f4f1eb;
+    padding: calc(var(--header) + 0.85rem) 1.5rem 2.5rem;
+    overflow: auto;
+    overscroll-behavior: contain;
     pointer-events: auto;
-    clip-path: none;
   }
 
   .nav-list {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0.35rem;
+    width: 100%;
+  }
+
+  .nav-list li {
+    width: 100%;
   }
 
   .nav-list a {
     display: flex;
     align-items: center;
+    box-sizing: border-box;
     min-height: 48px;
+    width: 100%;
     font-family: var(--serif);
     font-size: clamp(1.75rem, 1rem + 2.4vw, 2.15rem);
-    padding: 0.35rem 0;
+    line-height: 1.15;
+    padding: 0.5rem 0;
   }
 
   .hero,

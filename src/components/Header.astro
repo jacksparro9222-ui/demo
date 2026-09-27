@@ -38,19 +38,19 @@ function current(href: string) {
     >
       <span></span>
     </button>
-    <nav id="site-nav" class="nav-panel" data-nav-panel aria-label="Primary">
-      <ul class="nav-list">
-        {
-          items.map((item) => (
-            <li>
-              <a href={item.href} aria-current={current(item.href) ? "page" : undefined}>
-                {item.label}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </nav>
   </div>
 </header>
+<nav id="site-nav" class="nav-panel nav-overlay" data-nav-panel data-nav-overlay aria-label="Primary">
+  <ul class="nav-list">
+    {
+      items.map((item) => (
+        <li>
+          <a href={item.href} aria-current={current(item.href) ? "page" : undefined}>
+            {item.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
 
