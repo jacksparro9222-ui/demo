@@ -22,6 +22,9 @@ const fullTitle = title.includes("Dempo") ? title : `${title} · The House of De
 <!doctype html>
 <html lang="en">
   <head>
+    <script is:inline>
+      document.documentElement.classList.add("js");
+    </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow" />
@@ -50,22 +53,47 @@ const fullTitle = title.includes("Dempo") ? title : `${title} · The House of De
     <Footer />
     <script>
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const nodes = document.querySelectorAll("[data-reveal]");
+      const nodes = [...document.querySelectorAll("[data-reveal]")];
+      const show = (node) => node.classList.add("is-in");
       if (reduce || !("IntersectionObserver" in window)) {
-        nodes.forEach((node) => node.classList.add("is-in"));
+        nodes.forEach(show);
       } else {
+        const pending = new Set(nodes);
+        const ready = (node) => {
+          const rect = node.getBoundingClientRect();
+          const viewport = window.innerHeight;
+          const anyPartVisible = rect.bottom > 0 && rect.top < viewport;
+          const topAboveLine = rect.top < viewport * 0.85;
+          return anyPartVisible || topAboveLine;
+        };
+        const drop = (node) => {
+          show(node);
+          pending.delete(node);
+          observer.unobserve(node);
+          if (pending.size === 0) {
+            window.removeEventListener("scroll", flush);
+            window.removeEventListener("resize", flush);
+          }
+        };
+        const flush = () => {
+          for (const node of pending) {
+            if (ready(node)) drop(node);
+          }
+        };
         const observer = new IntersectionObserver(
           (entries) => {
             for (const entry of entries) {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("is-in");
-                observer.unobserve(entry.target);
+              if (entry.isIntersecting || entry.intersectionRatio > 0 || ready(entry.target)) {
+                drop(entry.target);
               }
             }
           },
-          { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+          { threshold: 0, rootMargin: "0px 0px -8% 0px" },
         );
-        nodes.forEach((node) => observer.observe(node));
+        for (const node of nodes) observer.observe(node);
+        flush();
+        window.addEventListener("scroll", flush, { passive: true });
+        window.addEventListener("resize", flush);
       }
 
       const toggle = document.querySelector("[data-nav-toggle]");

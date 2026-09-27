@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://dempo-concept.galactis.ai/sitemap-index.xml
+Sitemap: https://dempo-concept.onrender.com/sitemap-index.xml

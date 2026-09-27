@@ -1,9 +1,9 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 
-// Placeholder host for canonical and Open Graph URLs.
-// Replace SITE_URL when a public preview domain is chosen.
-const site = process.env.SITE_URL || "https://dempo-concept.galactis.ai";
+// Canonical and Open Graph host for the public preview.
+// Override with SITE_URL when building for a different domain.
+const site = process.env.SITE_URL || "https://dempo-concept.onrender.com";
 
 export default defineConfig({
   site,

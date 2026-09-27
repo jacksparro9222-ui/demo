@@ -20,7 +20,7 @@ npm run build
 npm run preview
 ```
 
-`npm run build` writes a static site to `dist/`, including `sitemap-index.xml` and WebP images. `SITE_URL` sets the canonical host used in that sitemap and in Open Graph tags. It defaults to `https://dempo-concept.galactis.ai`, which is not a live deployment.
+`npm run build` writes a static site to `dist/`, including `sitemap-index.xml` and WebP images. `SITE_URL` sets the canonical host used in that sitemap and in Open Graph tags. It defaults to `https://dempo-concept.onrender.com`.
 
 ```bash
 SITE_URL=https://example.com npm run build
