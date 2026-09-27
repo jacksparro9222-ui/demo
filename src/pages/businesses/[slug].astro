@@ -19,7 +19,7 @@ const others = businesses.filter((item) => item.slug !== business.slug);
     <div class="wrap split uneven">
       <div data-reveal>
         <span class="kicker">{business.kicker}</span>
-        <h1 style="font-size: clamp(2.8rem, 6vw, 4.6rem)">{business.name}</h1>
+        <h1 class="h-biz">{business.name}</h1>
         <p class="lede" style="margin-top: 1rem">{business.lede}</p>
         {business.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
         {
@@ -64,7 +64,7 @@ const others = businesses.filter((item) => item.slug !== business.slug);
             ))
           }
         </dl>
-        <h2 style="font-size: 1.6rem; margin: 2rem 0 0.6rem">Contact</h2>
+        <h2 class="h-sub h-contact-label">Contact</h2>
         <address class="address">
           {business.contact.map((line) => (
             <span>

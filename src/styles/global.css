@@ -25,6 +25,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header) + 0.75rem);
 }
 
 body {
@@ -36,6 +37,11 @@ body {
   font-weight: 400;
   line-height: 1.65;
   text-rendering: optimizeLegibility;
+  overflow-wrap: break-word;
+}
+
+[id] {
+  scroll-margin-top: calc(var(--header) + 0.75rem);
 }
 
 img {
@@ -116,10 +122,21 @@ p {
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 40;
+  z-index: 50;
   background: rgba(244, 241, 235, 0.92);
-  backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--line);
+}
+
+/* Blur lives on a pseudo-element. backdrop-filter on the header itself
+   would make it the containing block for the fixed menu and let the
+   closed panel leak its first link ("About") onto the page. */
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  backdrop-filter: blur(12px);
 }
 
 .header-inner {
@@ -133,9 +150,13 @@ p {
 }
 
 .brand {
+  position: relative;
+  z-index: 3;
   display: flex;
   align-items: center;
+  align-self: stretch;
   gap: 0.85rem;
+  min-height: 44px;
   color: var(--ink);
   text-decoration: none;
 }
@@ -151,7 +172,18 @@ p {
   line-height: 1.1;
 }
 
+/* The wordmark image already reads "The House of Dempo". Keep the
+   words for assistive tech, but don't paint them a second time. */
 .brand-text strong {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
   font-family: var(--serif);
   font-size: 1.15rem;
   font-weight: 600;
@@ -166,12 +198,15 @@ p {
 
 .nav-toggle {
   display: none;
+  position: relative;
+  z-index: 3;
   border: 1px solid var(--line);
-  background: transparent;
+  background: var(--paper);
   width: 2.75rem;
   height: 2.75rem;
   padding: 0;
   cursor: pointer;
+  flex: 0 0 auto;
 }
 
 .nav-toggle span,
@@ -194,6 +229,20 @@ p {
 
 .nav-toggle span::before { top: -6px; }
 .nav-toggle span::after { top: 6px; }
+
+.nav-toggle[aria-expanded="true"] span {
+  background: transparent;
+}
+
+.nav-toggle[aria-expanded="true"] span::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] span::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
 
 .nav-list {
   display: flex;
@@ -523,7 +572,7 @@ p {
 
 .pillars {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: 0;
   border-top: 1px solid var(--line);
 }
@@ -586,6 +635,62 @@ p {
   border: 0;
   padding: 0.85rem 1.3rem;
   cursor: pointer;
+}
+
+.h-display {
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  max-width: 14ch;
+}
+
+.h-display-lg {
+  font-size: clamp(3rem, 7vw, 5.4rem);
+  max-width: 14ch;
+}
+
+.h-display-news {
+  font-size: clamp(3rem, 7vw, 5.4rem);
+  max-width: 12ch;
+}
+
+.h-display-md {
+  font-size: clamp(3rem, 6vw, 4.8rem);
+}
+
+.h-biz {
+  font-size: clamp(2.8rem, 6vw, 4.6rem);
+}
+
+.h-404 {
+  font-size: clamp(3rem, 6vw, 4.5rem);
+}
+
+.h-sub {
+  font-size: 1.6rem;
+  margin-bottom: 0.4rem;
+}
+
+.h-contact-label {
+  margin: 2rem 0 0.6rem;
+}
+
+.h-name {
+  font-size: 1.45rem;
+}
+
+.quote.h-quote-lg {
+  font-size: 2.6rem;
+}
+
+.quote.h-quote-md {
+  font-size: 2.4rem;
+}
+
+.split > *,
+.two > *,
+.biz-block > *,
+.footer-grid > *,
+.rule-list > * {
+  min-width: 0;
 }
 
 .form button:hover {
@@ -671,6 +776,10 @@ html.js [data-reveal].is-in {
 }
 
 @media (min-width: 800px) {
+  .pillars {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   .split {
     grid-template-columns: 1fr 1fr;
     align-items: start;
@@ -683,10 +792,6 @@ html.js [data-reveal].is-in {
 
   .footer-grid {
     grid-template-columns: 1.3fr 1fr 1fr;
-  }
-
-  .pillars {
-    grid-template-columns: repeat(3, 1fr);
   }
 
   .biz-block {
@@ -707,27 +812,52 @@ html.js [data-reveal].is-in {
   }
 }
 
+html.nav-open,
+html.nav-open body {
+  overflow: hidden;
+}
+
 @media (max-width: 860px) {
   .nav-toggle {
     display: inline-grid;
     place-items: center;
   }
 
+  .brand {
+    gap: 0;
+  }
+
+  .brand-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   .nav-panel {
     position: fixed;
-    inset: var(--header) 0 0 0;
+    inset: 0;
+    z-index: 1;
     background: var(--paper);
-    transform: translateY(-8px);
+    padding: calc(var(--header) + 0.75rem) 1.5rem 2rem;
+    overflow: auto;
+    overscroll-behavior: contain;
+    visibility: hidden;
     opacity: 0;
     pointer-events: none;
-    padding: 1.5rem 1.25rem 2rem;
-    overflow: auto;
+    clip-path: inset(0 0 100% 0);
   }
 
   .nav-panel.is-open {
+    visibility: visible;
     opacity: 1;
-    transform: none;
     pointer-events: auto;
+    clip-path: none;
   }
 
   .nav-list {
@@ -737,14 +867,165 @@ html.js [data-reveal].is-in {
   }
 
   .nav-list a {
-    display: block;
+    display: flex;
+    align-items: center;
+    min-height: 48px;
     font-family: var(--serif);
-    font-size: 2rem;
-    padding: 0.45rem 0;
+    font-size: clamp(1.75rem, 1rem + 2.4vw, 2.15rem);
+    padding: 0.35rem 0;
   }
 
-  .brand-text {
-    display: none;
+  .hero,
+  .page-hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: stretch;
+    min-height: calc(100svh - var(--header));
+    min-height: calc(100dvh - var(--header));
+  }
+
+  .page-hero {
+    min-height: 72vh;
+  }
+
+  .hero-copy,
+  .page-hero .hero-copy {
+    margin-bottom: 0.35rem;
+  }
+
+  .hero-actions a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.9rem, 1.05rem + 3.6vw, 2.65rem);
+    max-width: 18ch;
+    line-height: 1.08;
+  }
+
+  .page-hero h1 {
+    font-size: clamp(1.95rem, 1.1rem + 3.4vw, 2.7rem);
+    max-width: 16ch;
+    line-height: 1.08;
+  }
+
+  .hero-copy p,
+  .page-hero .hero-copy p {
+    font-size: 1.02rem;
+    margin-top: 0.9rem;
+  }
+
+  .pillars {
+    margin: 1.25rem 0 0;
+    padding: 0;
+  }
+
+  .hero-actions {
+    gap: 0.25rem 1.35rem;
+    margin-top: 0.85rem;
+  }
+
+  .hero-credit {
+    position: static;
+    width: min(var(--wrap), calc(100% - 3rem));
+    margin: 0.85rem auto 1.15rem;
+    right: auto;
+    bottom: auto;
+    max-width: none;
+  }
+
+  .h-display,
+  .h-display-lg,
+  .h-display-news,
+  .h-display-md,
+  .h-biz,
+  .h-404 {
+    font-size: clamp(1.95rem, 1.05rem + 3.8vw, 2.75rem);
+    max-width: 18ch;
+  }
+
+  .prose h2,
+  .biz-block h2 {
+    font-size: clamp(1.6rem, 0.85rem + 2.8vw, 2.2rem);
+  }
+
+  .prose h3,
+  .h-sub,
+  .h-name {
+    font-size: clamp(1.28rem, 0.85rem + 1.6vw, 1.6rem);
+  }
+
+  .quote,
+  .quote.h-quote-lg,
+  .quote.h-quote-md {
+    font-size: clamp(1.65rem, 0.9rem + 2.8vw, 2.2rem);
+  }
+
+  .row-title {
+    font-size: clamp(1.4rem, 0.85rem + 2vw, 1.9rem);
+  }
+
+  .news-list h2,
+  .news-list h3 {
+    font-size: clamp(1.35rem, 0.8rem + 2vw, 1.85rem);
+  }
+
+  .pillars li {
+    font-size: clamp(1.35rem, 0.9rem + 1.8vw, 1.7rem);
+    padding-right: 0;
+  }
+
+  .lede {
+    font-size: 1.05rem;
+  }
+
+  .form {
+    max-width: none;
+    width: 100%;
+  }
+
+  .form input,
+  .form select {
+    font-size: 16px;
+    line-height: 1.4;
+    min-height: 44px;
+  }
+
+  .form textarea {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  .form button {
+    min-height: 48px;
+  }
+
+  .socials a,
+  .footer-grid p:not(.muted) a,
+  .fine a,
+  .facts a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .prose a,
+  .news-list a,
+  .biz-block p a {
+    padding-block: 0.7rem;
+  }
+
+  .socials {
+    gap: 0.15rem 0.35rem;
+  }
+
+  .footer-grid {
+    gap: 1.75rem;
   }
 }
 
@@ -752,8 +1033,9 @@ html.js [data-reveal].is-in {
   .wrap,
   .wrap-wide,
   .header-inner,
-  .hero-copy {
-    width: calc(100% - 2rem);
+  .hero-copy,
+  .hero-credit {
+    width: calc(100% - 3rem);
   }
 
   .facts div {
@@ -762,11 +1044,12 @@ html.js [data-reveal].is-in {
   }
 
   .section {
-    padding: 3.5rem 0;
+    padding: 3.25rem 0;
   }
 
-  .hero h1 {
-    max-width: 11ch;
+  .hero h1,
+  .page-hero h1 {
+    max-width: none;
   }
 }
 

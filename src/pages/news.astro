@@ -10,7 +10,7 @@ import { stories, podcasts } from "../data/news";
   <section class="section">
     <div class="wrap" data-reveal>
       <span class="kicker">News</span>
-      <h1 style="font-size: clamp(3rem, 7vw, 5.4rem); max-width: 12ch">From the Group’s own pages.</h1>
+      <h1 class="h-display-news">From the Group’s own pages.</h1>
       <p class="lede" style="margin-top: 1rem">
         These are reports published on dempos.com, chosen from the 733-post archive after
         a cross-check of that crawl. Summaries stay inside what each article says. This
@@ -37,7 +37,7 @@ import { stories, podcasts } from "../data/news";
     <div class="wrap two" data-reveal>
       <div>
         <span class="kicker">Navhind programmes</span>
-        <h2 class="quote" style="font-size: 2.4rem">{podcasts.insights.title}</h2>
+        <h2 class="quote h-quote-md">{podcasts.insights.title}</h2>
         <ul class="timeline">
           {
             podcasts.insights.episodes.map((episode) => (
@@ -52,7 +52,7 @@ import { stories, podcasts } from "../data/news";
       </div>
       <div>
         <span class="kicker">Navhind programmes</span>
-        <h2 class="quote" style="font-size: 2.4rem">{podcasts.brandMagic.title}</h2>
+        <h2 class="quote h-quote-md">{podcasts.brandMagic.title}</h2>
         <ul class="timeline">
           {
             podcasts.brandMagic.episodes.map((episode) => (

@@ -13,7 +13,7 @@ import { businesses } from "../data/businesses";
     <div class="wrap split" data-reveal>
       <div>
         <span class="kicker">Contact</span>
-        <h1 style="font-size: clamp(3rem, 6vw, 4.8rem)">Dempo House, Campal.</h1>
+        <h1 class="h-display-md">Dempo House, Campal.</h1>
         <p class="lede">
           Corporate headquarters, as printed on the contact page.
         </p>
@@ -71,7 +71,7 @@ import { businesses } from "../data/businesses";
     <div class="wrap two">
       <div data-reveal>
         <span class="kicker">Demonstration only</span>
-        <h2 class="quote" style="font-size: 2.6rem; margin-bottom: 1rem">Write to the house.</h2>
+        <h2 class="quote h-quote-lg" style="margin-bottom: 1rem">Write to the house.</h2>
         <form class="form" data-demo-form novalidate>
           <label>
             Name
@@ -105,13 +105,13 @@ import { businesses } from "../data/businesses";
       </div>
       <div data-reveal>
         <span class="kicker">Company desks</span>
-        <h2 class="quote" style="font-size: 2.4rem; margin-bottom: 0.5rem">Where each page says to write.</h2>
+        <h2 class="quote h-quote-md" style="margin-bottom: 0.5rem">Where each page says to write.</h2>
         {
           businesses
             .filter((item) => item.slug !== "emerging")
             .map((item) => (
               <article style="padding: 1rem 0; border-top: 1px solid var(--line)">
-                <h3 style="font-size: 1.45rem">
+                <h3 class="h-name">
                   <a href={`/businesses/${item.slug}`}>{item.name}</a>
                 </h3>
                 <p class="muted" style="margin: 0.35rem 0 0">
